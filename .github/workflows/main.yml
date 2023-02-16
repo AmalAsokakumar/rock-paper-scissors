@@ -17,14 +17,21 @@ jobs:
           
       - name: Step 3 - Maven GiHhub Actions Build Maven Project
         run: mvn -B package --file pom.xml
+        
+      - name: Step 4 - Set up a cache for Maven
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
       
-      - name: Step 4 - List out what is inside the current directory
+      - name: Step 5 - List out what is inside the current directory
         run: ls -a
       
-      - name: Step4 - What is inside the Target Directory ?
+      - name: Step 6 - What is inside the Target Directory ?
         run: |
           cd target
           ls -a
-          
+          env 
           
     
